@@ -1,13 +1,18 @@
 extern mod mruby;
 
 fn main() {
-  let rubyland = mruby::MRuby::new();
-  let ruby_proc = rubyland.compile_string("'Hello, world!'");
+    use mruby::{MRuby, Bool, String, Fixnum, Float, None};
 
-  let result = rubyland.run_proc(ruby_proc);
+    let ruby_land = MRuby::new();
+    let ruby_proc = ruby_land.compile_string("'Hello, world!'");
 
-  match result.to_str() {
-    Some(string) => println!("The return value was: {:?}", string),
-    None => println!("The return value was not a string")
-  }
+    let result = ruby_land.run_proc(ruby_proc);
+
+    match result {
+        Bool(b) => println!("The return value was a bool: {:?}", b),
+        String(s) => println!("The return value was a string: {:?}", s),
+        Fixnum(i) => println!("The return value was a fixnum: {:?}", i),
+        Float(f) => println!("The return value was a float: {:?}", f),
+        None => println!("I don't know how to handle this return type yet"),
+    }
 }
