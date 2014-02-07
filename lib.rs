@@ -3,7 +3,7 @@
 #[crate_id="github.com/SebastianEdwards/rust-mruby#mruby:0.1"];
 
 #[comment = "MRuby bindings for Rust"];
-#[license = "MIT"];
+#[license = "ASL2"];
 #[crate_type = "rlib"];
 
 pub mod raw;
