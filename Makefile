@@ -12,8 +12,10 @@ $(LIBNAME): $(LIB_RS)
 
 examples:
 	rustc -L. examples/hello.rs
+	rustc -L. examples/call_rust_fn.rs
 
 clean:
 	rm -f $(LIBNAME) config.rs
 	rm -rf doc
-	$(MAKE) -C examples clean
+	rm examples/hello
+	rm examples/call_rust_fn

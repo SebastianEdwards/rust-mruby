@@ -35,6 +35,14 @@ impl MRuby {
     pub fn run_proc(&self, ruby_proc: *raw::MrbProc) -> Value {
         unsafe { value_from_raw(raw::mrb_run(self.mrb, ruby_proc, raw::mrb_top_self(self.mrb))) }
     }
+
+    pub fn create_global_method(&self, name: &str, c_func: extern "C" fn()) {
+        unsafe {
+            let c_name = name.to_c_str().unwrap();
+            raw::mrb_define_method(self.mrb,
+                raw::mrb_obj_class(self.mrb, raw::mrb_top_self(self.mrb)), c_name, c_func, 0)
+        }
+    }
 }
 
 impl Drop for MRuby {

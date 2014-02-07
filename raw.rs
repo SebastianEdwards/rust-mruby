@@ -206,4 +206,7 @@ extern "C" {
     pub fn mrb_top_self(mrb: *MrbState) -> mruby_Value;
 
     pub fn mrb_run(mrb: *MrbState, ruby_proc: *MrbProc, value: mruby_Value) -> mruby_Value;
+
+    pub fn mrb_obj_class(mrb: *MrbState, obj: mruby_Value) -> *RClass;
+    pub fn mrb_define_method(mrb: *MrbState, class: *RClass, name: *i8, func: extern "C" fn(), aspec: u32);
 }
